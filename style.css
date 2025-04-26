@@ -1,0 +1,243 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.card-shape {
+    min-height: 120px;
+    border-radius: 10px;
+    background-color: blue;
+    text-align: center;
+}
+
+.memory-grid {
+    display: grid;
+    gap: 16px 16px;
+    grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+
+.canvas {
+    display: flex;
+    flex-direction: row;
+}
+
+.kylos {
+    position: relative;
+    height: 600px;
+    width: 300px;
+    background-image:
+        linear-gradient(to top, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to bottom, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to bottom, transparent, black, transparent),
+        linear-gradient(to top, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to bottom, black, transparent),
+        linear-gradient(to top, black, transparent 55%),
+        linear-gradient(to bottom, black, transparent 55%),
+        linear-gradient(to right, black, transparent 55%),
+        linear-gradient(to bottom, black, transparent 55%),
+        linear-gradient(to top, black, transparent 55%),
+        linear-gradient(to right, black, transparent 55%),
+        linear-gradient(to top, black, transparent 55%),
+        linear-gradient(to bottom, black, transparent 55%),
+        linear-gradient(to left, black, transparent 55%),
+        linear-gradient(to bottom, black, transparent 55%),
+        linear-gradient(to top, black, transparent 55%),
+        linear-gradient(to left, black, transparent 55%),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to bottom, black, transparent);
+    background-size:
+        36px 8px,
+        8px 18px,
+        8px 18px,
+        38px 8px,
+        8px 88px,
+        8px 88px,
+        28px 6px,
+        36px 8px,
+        8px 34px,
+        8px 34px,
+        36px 8px,
+        12px 8px,
+        12px 8px,
+        8px 20px,
+        12px 8px,
+        12px 8px,
+        8px 16px,
+        12px 8px,
+        12px 8px,
+        8px 20px,
+        12px 8px,
+        12px 8px,
+        8px 16px,
+        8px 12px,
+        8px 12px,
+        28px 8px;
+    background-position:
+        50% 508px,
+        calc(50% - 15px) 497px,
+        calc(50% + 15px) 497px,
+        50% 494px,
+        calc(50% - 12px) 408px,
+        calc(50% + 12px) 408px,
+        50% 472px,
+        50% 404px,
+        calc(50% - 16px) 376px,
+        calc(50% + 16px) 376px,
+        50% 376px,
+        calc(50% - 24px) 396px,
+        calc(50% - 24px) 384px,
+        calc(50% - 27px) 384px,
+        calc(50% - 37px) 386px,
+        calc(50% - 37px) 394px,
+        calc(50% - 39px) 386px,
+        calc(50% + 24px) 396px,
+        calc(50% + 24px) 384px,
+        calc(50% + 27px) 384px,
+        calc(50% + 37px) 386px,
+        calc(50% + 37px) 394px,
+        calc(50% + 39px) 386px,
+        calc(50% - 12px) 364px,
+        calc(50% + 12px) 364px,
+        50% 364px;
+    background-repeat: no-repeat;
+}
+
+.kylos::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: calc(50% - 12px);
+    height: 0;
+    width: 24px;
+    bottom: 234px;
+    box-shadow:
+        inset 0 0 24px red,
+        0 0 10px red,
+        0 0 24px red;
+    background-image: linear-gradient(to left,
+            red,
+            transparent 40%,
+            transparent 60%,
+            red);
+    border-radius: 8px 8px 0px / 30px 30px 0px 0px;
+    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
+}
+
+.kylos::after {
+    transition: all 2s;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 199px;
+    left: calc(50% - 1px);
+    height: 14px;
+    width: 0;
+    box-shadow:
+        inset 0 0 20px red,
+        0 0 6px red,
+        0 0 32px red;
+    border-radius: 30px 30px 30px 30px / 8px 8px 8px 8px;
+    background-image: linear-gradient(to bottom,
+            red,
+            transparent 45%,
+            transparent 55%,
+            red);
+
+    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
+}
+
+.kylos:hover::before {
+    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
+    height: 310px;
+}
+
+.kylos:hover::after {
+    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
+    left: calc(50% - 74px);
+    width: 148px;
+}
+
+.dark {
+    position: relative;
+    background-color: gray;
+    height: 600px;
+    width: 300px;
+    background-image:
+        linear-gradient(to top, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(-35deg,
+            transparent 40%,
+            black 58%,
+            black 60%,
+            transparent 60%),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(35deg, transparent 54%, black 58%, transparent 65%),
+        linear-gradient(to left, transparent, black, transparent),
+        linear-gradient(to bottom, transparent, black, transparent),
+        linear-gradient(to bottom, transparent, black, transparent),
+        linear-gradient(to bottom, transparent, black, transparent),
+        linear-gradient(to bottom, transparent, black, transparent),
+        linear-gradient(to left, black, transparent 35%, transparent 65%, black),
+        linear-gradient(to left, black, transparent 35%, transparent 65%, black),
+        linear-gradient(to left, black, transparent 35%, transparent 65%, black);
+    background-size:
+        28px 8px,
+        8px 148px,
+        28px 28px,
+        8px 130px,
+        64px 28px,
+        6px 24px,
+        12px 4px,
+        12px 4px,
+        12px 4px,
+        12px 4px,
+        28px 4px,
+        28px 4px,
+        28px 4px;
+    background-position:
+        50% 508px,
+        calc(50% + 10px) 368px,
+        50% 365px,
+        calc(50% - 10px) 385px,
+        calc(50% - 12px) 404px,
+        calc(50% - 23px) 380px,
+        calc(50% - 2px) 388px,
+        calc(50% - 2px) 392px,
+        calc(50% - 2px) 396px,
+        calc(50% - 2px) 400px,
+        50% 504px,
+        50% 497px,
+        50% 490px;
+    background-repeat: no-repeat;
+}
+
+.dark::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 215px;
+    left: calc(50% - 10px);
+    width: 20px;
+    height: 0px;
+    background-image:
+        linear-gradient(to left, transparent, black 75%, transparent),
+        linear-gradient(to left, transparent, white 1%);
+    border-radius: 0px 12px 25px 0px / 0px 75px 25px 25px;
+    box-shadow:
+        inset 0 0 18px black,
+        0 0 26px white,
+        0 0 10px white;
+    transition: height 1.5s;
+}
+
+.dark:hover::before {
+    transition: height 2s;
+    height: 300px;
+}
