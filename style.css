@@ -1,19 +1,178 @@
+:root {
+    --card-reverse-color: #e2e2e2;
+    --quartz: #4a4a4a;
+    --dark-charcoal: #2e2e2e;
+}
+
 body {
     padding: 0;
     margin: 0;
+    background-image: linear-gradient(to left,
+            var(--dark-charcoal),
+            var(--quartz),
+            var(--dark-charcoal));
 }
 
-.card-shape {
-    min-height: 120px;
-    border-radius: 10px;
-    background-color: blue;
-    text-align: center;
+.memory-grid-container {
+    display: flex;
+    justify-content: center;
 }
 
 .memory-grid {
     display: grid;
-    gap: 16px 16px;
+    gap: 32px 32px;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+
+.card-wrap {
+    position: relative;
+}
+
+.card-shape {
+    position: absolute;
+    top: 0;
+    min-height: 600px;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 32px -8px black;
+}
+
+.card-obverse {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: var(--card-reverse-color);
+    animation-name: obverse-rotation;
+    animation-timing-function: linear;
+}
+
+.card-reverse {
+    object-fit: cover;
+    animation-name: reverse-rotation;
+    animation-timing-function: linear;
+}
+
+.flip-to-obverse-animation {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    box-shadow: -4px 4px 32px -8px black;
+    transition: box-shadow 1.25s;
+}
+
+.flip-to-reverse-animation {
+    animation-duration: 1.25s;
+    animation-direction: reverse;
+    animation-fill-mode: both;
+}
+
+@keyframes obverse-rotation {
+    25% {
+        transform: rotate3d(0.2, 1, 0, 90deg);
+    }
+
+    33% {
+        translate: -100px;
+    }
+
+    50% {
+        z-index: 1;
+        transform: rotate3d(-0.4, 1, 0, 270deg);
+    }
+
+    51% {
+        z-index: 0;
+    }
+
+    66% {
+        translate: -200px;
+    }
+
+    75% {
+        transform: rotate3d(0.4, 1, 0, 450deg);
+    }
+
+    100% {
+        z-index: 1;
+        transform: rotate3d(0, 1, 0, 540deg);
+    }
+}
+
+@keyframes reverse-rotation {
+    25% {
+        transform: rotate3d(0.2, 1, 0, 90deg);
+    }
+
+    33% {
+        translate: -100px;
+    }
+
+    50% {
+        transform: rotate3d(-0.4, 1, 0, 270deg);
+    }
+
+    66% {
+        translate: -200px;
+    }
+
+    75% {
+        transform: rotate3d(0.4, 1, 0, 450deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 1, 0, 540deg);
+    }
+}
+
+.obverse-text {
+    transform: rotateY(180deg);
+    font-family: sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.red-text {
+    color: white;
+    text-shadow:
+        0 0 4px red,
+        0 0 8px red,
+        0 0 16px red,
+        0 0 32px red;
+}
+
+.blue-text {
+    color: white;
+    text-shadow:
+        0 0 4px blue,
+        0 0 8px blue,
+        0 0 16px blue,
+        0 0 32px blue;
+}
+
+.green-text {
+    color: white;
+    text-shadow:
+        0 0 4px green,
+        0 0 8px green,
+        0 0 16px green,
+        0 0 32px green;
+}
+
+.purple-text {
+    color: white;
+    text-shadow:
+        0 0 4px purple,
+        0 0 8px purple,
+        0 0 16px purple,
+        0 0 32px purple;
+}
+
+.dark-text {
+    color: white;
+    text-shadow:
+        0 0 4px black,
+        0 0 8px black,
+        0 0 16px black,
+        0 0 32px black;
 }
 
 .canvas {
@@ -109,7 +268,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.kylos::before {
+.kylos-red-on::before {
     content: "";
     display: block;
     position: absolute;
@@ -127,10 +286,12 @@ body {
             transparent 60%,
             red);
     border-radius: 8px 8px 0px / 30px 30px 0px 0px;
-    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
+    animation-name: kylos-pseudobefore-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
 }
 
-.kylos::after {
+.kylos-red-on::after {
     transition: all 2s;
     content: "";
     display: block;
@@ -144,29 +305,81 @@ body {
         0 0 6px red,
         0 0 32px red;
     border-radius: 30px 30px 30px 30px / 8px 8px 8px 8px;
+    background-image: linear-gradient(to bottom, red, white 35%, white 65%, red);
+    animation-name: kylos-pseudoafter-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.kylos-blue-on::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: calc(50% - 12px);
+    height: 0;
+    width: 24px;
+    bottom: 234px;
+    box-shadow:
+        inset 0 0 24px blue,
+        0 0 10px blue,
+        0 0 24px blue;
+    background-image: linear-gradient(to left,
+            blue,
+            transparent 40%,
+            transparent 60%,
+            blue);
+    border-radius: 8px 8px 0px / 30px 30px 0px 0px;
+    animation-name: kylos-pseudobefore-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.kylos-blue-on::after {
+    transition: all 2s;
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 199px;
+    height: 14px;
+    box-shadow:
+        inset 0 0 20px blue,
+        0 0 6px blue,
+        0 0 32px blue;
+    border-radius: 30px 30px 30px 30px / 8px 8px 8px 8px;
     background-image: linear-gradient(to bottom,
-            red,
-            transparent 45%,
-            transparent 55%,
-            red);
-
-    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
+            blue,
+            white 35%,
+            white 65%,
+            blue);
+    animation-name: kylos-pseudoafter-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
 }
 
-.kylos:hover::before {
-    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
-    height: 310px;
+@keyframes kylos-pseudobefore-on {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 310px;
+    }
 }
 
-.kylos:hover::after {
-    transition: all cubic-bezier(0.23, 1, 0.32, 1) 2s;
-    left: calc(50% - 74px);
-    width: 148px;
+@keyframes kylos-pseudoafter-on {
+    from {
+        left: 50%;
+        width: 0;
+    }
+
+    to {
+        left: calc(50% - 74px);
+        width: 148px;
+    }
 }
 
 .dark {
     position: relative;
-    background-color: gray;
     height: 600px;
     width: 300px;
     background-image:
@@ -180,13 +393,18 @@ body {
         linear-gradient(to right, black, transparent),
         linear-gradient(35deg, transparent 54%, black 58%, transparent 65%),
         linear-gradient(to left, transparent, black, transparent),
-        linear-gradient(to bottom, transparent, black, transparent),
-        linear-gradient(to bottom, transparent, black, transparent),
-        linear-gradient(to bottom, transparent, black, transparent),
-        linear-gradient(to bottom, transparent, black, transparent),
-        linear-gradient(to left, black, transparent 35%, transparent 65%, black),
-        linear-gradient(to left, black, transparent 35%, transparent 65%, black),
-        linear-gradient(to left, black, transparent 35%, transparent 65%, black);
+        linear-gradient(to bottom, black, transparent 40%, transparent 60%, black),
+        linear-gradient(to bottom, black, transparent 30%, transparent 60%, black),
+        linear-gradient(to bottom, black, transparent 30%, transparent 60%, black),
+        linear-gradient(to bottom, black, transparent 40%, transparent 60%, black),
+        linear-gradient(to left, black 70%, transparent 75%),
+        linear-gradient(to top, black 70%, transparent 75%),
+        linear-gradient(to left, black 70%, transparent 75%),
+        linear-gradient(to top, black 70%, transparent 75%),
+        linear-gradient(to left, black 70%, transparent 75%),
+        linear-gradient(to top, black 70%, transparent 75%),
+        linear-gradient(to left, black), linear-gradient(to left, black),
+        linear-gradient(to left, black);
     background-size:
         28px 8px,
         8px 148px,
@@ -194,13 +412,19 @@ body {
         8px 130px,
         64px 28px,
         6px 24px,
-        12px 4px,
-        12px 4px,
-        12px 4px,
-        12px 4px,
-        28px 4px,
-        28px 4px,
-        28px 4px;
+        12px 6px,
+        12px 6px,
+        12px 6px,
+        12px 6px,
+        4px 36px,
+        8px 4px,
+        4px 40px,
+        14px 4px,
+        4px 44px,
+        20px 4px,
+        28px 3px,
+        28px 3px,
+        28px 3px;
     background-position:
         50% 508px,
         calc(50% + 10px) 368px,
@@ -208,24 +432,29 @@ body {
         calc(50% - 10px) 385px,
         calc(50% - 12px) 404px,
         calc(50% - 23px) 380px,
-        calc(50% - 2px) 388px,
+        calc(50% - 2px) 386px,
         calc(50% - 2px) 392px,
-        calc(50% - 2px) 396px,
-        calc(50% - 2px) 400px,
+        calc(50% - 2px) 398px,
+        calc(50% - 2px) 404px,
+        calc(50% - 6px) 416px,
+        calc(50% - 10px) 448px,
+        50% 420px,
+        calc(50% - 6px) 456px,
+        calc(50% + 7px) 424px,
+        calc(50% - 2px) 464px,
         50% 504px,
         50% 497px,
         50% 490px;
     background-repeat: no-repeat;
 }
 
-.dark::before {
+.dark-dark-on::before {
     content: "";
     display: block;
     position: absolute;
     bottom: 215px;
     left: calc(50% - 10px);
     width: 20px;
-    height: 0px;
     background-image:
         linear-gradient(to left, transparent, black 75%, transparent),
         linear-gradient(to left, transparent, white 1%);
@@ -234,10 +463,357 @@ body {
         inset 0 0 18px black,
         0 0 26px white,
         0 0 10px white;
-    transition: height 1.5s;
+    animation-name: turn-dark-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
 }
 
-.dark:hover::before {
-    transition: height 2s;
-    height: 300px;
+@keyframes turn-dark-on {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 280px;
+    }
+}
+
+.obis {
+    position: relative;
+    height: 600px;
+    width: 300px;
+    background-image:
+        linear-gradient(to top, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent, black),
+        linear-gradient(to left, black, transparent, black),
+        linear-gradient(to left, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to bottom, black, transparent),
+        linear-gradient(to left, black, transparent, black),
+        linear-gradient(to bottom, black, transparent, black),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent, black),
+        linear-gradient(to top, black, transparent, black, transparent),
+        linear-gradient(65deg,
+            transparent 15%,
+            black 15%,
+            black 20%,
+            transparent 30%),
+        linear-gradient(-65deg,
+            transparent 15%,
+            black 15%,
+            black 20%,
+            transparent 30%),
+        linear-gradient(to bottom, black, transparent);
+
+    background-size:
+        24px 8px,
+        8px 140px,
+        8px 140px,
+        6px 24px,
+        6px 24px,
+        6px 24px,
+        18px 8px,
+        18px 8px,
+        18px 8px,
+        18px 12px,
+        18px 12px,
+        18px 12px,
+        18px 12px,
+        18px 8px,
+        18px 8px,
+        24px 8px,
+        10px 4px,
+        28px 8px,
+        8px 8px,
+        8px 8px,
+        10px 4px,
+        18px 8px,
+        24px 24px,
+        24px 24px,
+        40px 6px;
+    background-position:
+        50% 528px,
+        calc(50% + 9px) 396px,
+        calc(50% - 8px) 396px,
+        calc(50% - 6px) 498px,
+        50% 498px,
+        calc(50% + 6px) 498px,
+        50% 478px,
+        50% 470px,
+        50% 462px,
+        50% 450px,
+        50% 438px,
+        50% 426px,
+        50% 414px,
+        50% 406px,
+        50% 408px,
+        50% 496px,
+        50% 392px,
+        50% 384px,
+        calc(50% + 12px) 384px,
+        calc(50% - 12px) 384px,
+        50% 380px,
+        50% 372px,
+        calc(50% - 4px) 352px,
+        calc(50% + 4px) 352px,
+        50% 356px;
+    background-repeat: no-repeat;
+}
+
+.obis-blue-on::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 242px;
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 0;
+    box-shadow:
+        inset 0 0 24px blue,
+        0 0 8px blue,
+        0 0 32px blue;
+    background-image: linear-gradient(to left,
+            blue,
+            transparent 40%,
+            transparent 60%,
+            blue);
+    border-radius: 12px 12px 0 0 / 24px 24px 0 0;
+    animation-name: turn-obis-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.obis-purple-on::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 242px;
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 0;
+    box-shadow:
+        inset 0 0 24px purple,
+        0 0 8px purple,
+        0 0 32px purple;
+    background-image: linear-gradient(to left,
+            purple,
+            transparent 40%,
+            transparent 60%,
+            purple);
+    border-radius: 12px 12px 0 0 / 24px 24px 0 0;
+    animation-name: turn-obis-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes turn-obis-on {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 340px;
+    }
+}
+
+.generic {
+    position: relative;
+    height: 600px;
+    width: 300px;
+    background-color: #d5d5d5;
+    background-image:
+        linear-gradient(to top, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to top, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to bottom, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to bottom, black, transparent 45%, transparent 55%, black),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black, transparent),
+        linear-gradient(25deg, transparent 40%, black, transparent 60%),
+        linear-gradient(to right, black, transparent),
+        linear-gradient(to left, black), linear-gradient(to left, black),
+        linear-gradient(to left, black), linear-gradient(to bottom, black),
+        linear-gradient(to bottom, black), linear-gradient(to bottom, black),
+        linear-gradient(to left, black);
+    background-size:
+        28px 8px,
+        8px 74px,
+        8px 74px,
+        32px 8px,
+        8px 18px,
+        8px 18px,
+        32px 8px,
+        8px 20px,
+        8px 20px,
+        36px 10px,
+        4px 10px,
+        4px 10px,
+        8px 7px,
+        28px 28px,
+        8px 16px,
+        4px 36px,
+        4px 36px,
+        4px 36px,
+        28px 4px,
+        12px 4px,
+        12px 4px,
+        4px 8px;
+    background-position:
+        50% 510px,
+        calc(50% + 10px) 444px,
+        calc(50% - 10px) 444px,
+        50% 436px,
+        calc(50% + 14px) 426px,
+        calc(50% - 14px) 426px,
+        50% 426px,
+        calc(50% + 10px) 406px,
+        calc(50% - 10px) 406px,
+        50% 396px,
+        calc(50% + 16px) 396px,
+        calc(50% - 16px) 396px,
+        calc(50% + 10px) 390px,
+        50% 370px,
+        calc(50% - 10px) 380px,
+        50% 480px,
+        calc(50% + 8px) 480px,
+        calc(50% - 8px) 480px,
+        50% 470px,
+        calc(50% - 6px) 412px,
+        calc(50% - 6px) 418px,
+        calc(50% - 2px) 412px;
+    background-repeat: no-repeat;
+}
+
+.generic-red-on::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 210px;
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 0;
+    border-radius: 12px 12px 6px 18px / 24px 24px 12px 24px;
+    box-shadow:
+        inset 0 0 24px red,
+        0 0 8px red,
+        0 0 24px red;
+    background-image: linear-gradient(to left,
+            red,
+            transparent 40%,
+            transparent 60%,
+            red);
+    animation-name: turn-generic-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.generic-blue-on::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 210px;
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 0;
+    border-radius: 12px 12px 6px 18px / 24px 24px 12px 24px;
+    box-shadow:
+        inset 0 0 24px blue,
+        0 0 8px blue,
+        0 0 24px blue;
+    background-image: linear-gradient(to left,
+            blue,
+            transparent 40%,
+            transparent 60%,
+            blue);
+    animation-name: turn-generic-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.generic-green-on::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 210px;
+    left: calc(50% - 12px);
+    width: 24px;
+    height: 0;
+    border-radius: 12px 12px 6px 18px / 24px 24px 12px 24px;
+    box-shadow:
+        inset 0 0 24px green,
+        0 0 8px green,
+        0 0 24px green;
+    background-image: linear-gradient(to left,
+            green,
+            transparent 40%,
+            transparent 60%,
+            green);
+    animation-name: turn-generic-on;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes turn-generic-on {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: 290px;
+    }
+}
+
+.info-board {
+    width: 100vw;
+    height: 112px;
+    margin-bottom: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 80px;
+    background-image: linear-gradient(to left,
+            var(--dark-charcoal),
+            var(--quartz),
+            var(--dark-charcoal));
+    border-bottom: 1px solid var(--card-reverse-color);
+    box-shadow: 8px 8px 48px -12px black;
+}
+
+.moves-text {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 1.25em;
+    color: var(--card-reverse-color);
+}
+
+.reset {
+    padding: 16px;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    object-fit: contain;
 }
